@@ -82,6 +82,61 @@ dash
 				BL dotdelay
 				POP {LR}
 				BX LR
+				
+one_morse 
+				;dot dash dash dash dash
+				PUSH{LR}
+				BL dot
+				BL dash
+				BL dash
+				BL dash
+				BL dash
+				POP {LR}
+				BX LR 
+					
+three_morse
+				; dot dot dot dash dash
+				PUSH {LR}
+				BL dot
+				BL dot
+				BL dot
+				BL dash
+				BL dash
+				POP {LR}
+				BX LR
+
+five_morse 
+				;dot dot dot dot dot
+				PUSH {LR}
+				BL dot
+				BL dot
+				BL dot 
+				BL dot
+				BL dot
+				POP {LR}
+				BX LR 
+
+seven_morse
+				;dash dash dot dot dot
+				PUSH {LR} 
+				BL dash
+				BL dash
+				BL dot
+				BL dot
+				BL dot
+				POP {LR}
+				BX LR 
+				
+nine_morse
+				;dash dash dash dash dot
+				PUSH {LR}
+				BL dash
+				BL dash
+				BL dash
+				BL dash
+				BL dot
+				POP {LR}
+				BX LR 
 
 
 
