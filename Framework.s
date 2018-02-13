@@ -63,6 +63,8 @@ dashdelay
 				BL dotdelay
 				POP {LR}
 				BX LR
+
+
 				
 loop
 				SUBS R2, #1
