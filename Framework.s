@@ -15,18 +15,12 @@ twentytwo EQU 0x00400000 ; 1 << 22
 
 __main
 	; Your code goes here!
-	; You the man Edy!
+		MOV   R0, #0
 		MOV   R3, #7
 		MOV   R7, #19
 		MOV   R1, #0xbeef
 		BL    LEDSETUP
-		BL    LEDON
-		BL    dashdelay
-		BL 	  LEDOFF
-		BL	  dotdelay
-		BL    LEDON
-		BL    dotdelay
-		BL    LEDOFF
+		
 		B     forever
 
 fib		
@@ -70,6 +64,26 @@ loop
 				SUBS R2, #1
 				BNE loop
 				BX LR
+
+dot
+				PUSH {LR}
+				BL LEDON
+				BL dotdelay
+				BL LEDOFF
+				BL dotdelay
+				POP {LR}
+				BX LR
+
+dash
+				PUSH {LR}
+				BL LEDON
+				BL dashdelay
+				BL LEDOFF
+				BL dotdelay
+				POP {LR}
+				BX LR
+
+
 
 ; The functions below are for you to use freely      
 LEDON				
