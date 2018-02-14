@@ -81,7 +81,54 @@ dash
 				POP {LR}
 				BX LR
 
-
+zero_morse
+				PUSH {LR}
+				BL dash
+				BL dash
+				BL dash
+				BL dash
+				BL dash
+				POP {LR}
+				BX LR
+				
+two_morse
+				PUSH {LR}
+				BL dot
+				BL dot
+				BL dash
+				BL dash
+				BL dash
+				POP {LR}
+				BX LR
+				
+four_morse
+				PUSH {LR}
+				BL dot
+				BL dot
+				BL dot
+				BL dot
+				BL dash
+				POP {LR}
+				BX LR
+six_morse
+				PUSH {LR}
+				BL dash
+				BL dot
+				BL dot
+				BL dot
+				BL dot
+				POP {LR}
+				BX LR
+				
+eight_morse
+				PUSH {LR}
+				BL dash
+				BL dash
+				BL dash
+				BL dot
+				BL dot
+				POP {LR}
+				BX LR
 
 ; The functions below are for you to use freely      
 LEDON				
