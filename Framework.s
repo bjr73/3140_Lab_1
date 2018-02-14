@@ -15,12 +15,12 @@ twentytwo EQU 0x00400000 ; 1 << 22
 
 __main
 	; Your code goes here!
-		MOV   R0, #0
+		MOV   R0, #7
 		MOV   R3, #7
 		MOV   R7, #19
 		MOV   R1, #0xbeef
 		BL    LEDSETUP
-		
+		BL    MorseDigit
 		B     forever
 
 fib		
@@ -184,6 +184,31 @@ eight_morse
 				BL dash
 				BL dot
 				BL dot
+				POP {LR}
+				BX LR
+
+MorseDigit
+				PUSH {LR}
+				CMP R0, #0
+				BEQ zero_morse
+				CMP R0, #1
+				BEQ one_morse
+				CMP R0, #2
+				BEQ two_morse
+				CMP R0, #3
+				BEQ three_morse
+				CMP R0, #4
+				BEQ four_morse
+				CMP R0, #5
+				BEQ five_morse
+				CMP R0, #6
+				BEQ six_morse
+				CMP R0, #7
+				BEQ seven_morse
+				CMP R0, #8
+				BEQ eight_morse
+				CMP R0, #9
+				BEQ nine_morse
 				POP {LR}
 				BX LR
 
