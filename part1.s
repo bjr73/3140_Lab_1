@@ -40,7 +40,7 @@ __main
 
 dotdelay		;defines the duration of time to leave the LED on for a dot
 				PUSH {R4, LR}
-				MOV R4, #(1 << 21)
+				MOV R4, #twentytwo
 				BL loop
 				POP {R4, LR}
 				BX LR
@@ -176,7 +176,7 @@ nine_morse		;dash dash dash dash dot
 				POP {LR}
 				BX LR
 
-MorseDigit
+MorseDigit		;ten consecutive if statements examining the input
 				PUSH {LR}
 				CMP R0, #0
 				BEQ zero_morse

@@ -207,7 +207,7 @@ nine_morse		;dash dash dash dash dot
 				POP {LR}
 				BX LR
 
-MorseDigit
+MorseDigit		;ten consecutive if statements examining the input
 				PUSH {LR}
 				CMP R0, #0
 				BEQ zero_morse
