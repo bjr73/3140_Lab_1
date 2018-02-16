@@ -19,6 +19,24 @@ __main
 		MOV   R0, #6
 		BL 	  fib
 		BL    MorseDigit
+		MOV   R0, #5
+		BL 	  fib
+		BL    MorseDigit
+		MOV   R0, #4
+		BL 	  fib
+		BL    MorseDigit
+		MOV   R0, #3
+		BL 	  fib
+		BL    MorseDigit
+		MOV   R0, #2
+		BL 	  fib
+		BL    MorseDigit
+		MOV   R0, #1
+		BL 	  fib
+		BL    MorseDigit
+		MOV   R0, #0
+		BL 	  fib
+		BL    MorseDigit
 		B     forever
 
 fib		
