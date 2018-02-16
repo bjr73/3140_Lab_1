@@ -16,42 +16,31 @@ twentytwo EQU 0x00400000 ; 1 << 22
 __main
 	; Your code goes here!
 		BL    LEDSETUP
-		;BL    test_morse
-		MOV   R0, #5
-		BL    MorseDigit
+		MOV R0, #0
+		BL MorseDigit
+		MOV R0, #1
+		BL MorseDigit
+		MOV R0, #2
+		BL MorseDigit
+		MOV R0, #3
+		BL MorseDigit
+		MOV R0, #4
+		BL MorseDigit
+		MOV R0, #5
+		BL MorseDigit
+		MOV R0, #6
+		BL MorseDigit
+		MOV R0, #7
+		BL MorseDigit
+		MOV R0, #8
+		BL MorseDigit
+		MOV R0, #9
+		BL MorseDigit
 		B     forever
-
-test_morse		;test cases for MorseDigit functionality
-				PUSH {LR}
-				MOV R4, #5
-				MOV R0, #0
-				BL MorseDigit
-				MOV R0, #1
-				BL MorseDigit
-				MOV R0, #2
-				BL MorseDigit
-				MOV R0, #3
-				BL MorseDigit
-				MOV R0, #4
-				BL MorseDigit
-				MOV R0, #5
-				BL MorseDigit
-				MOV R0, #6
-				BL MorseDigit
-				MOV R0, #7
-				BL MorseDigit
-				MOV R0, #8
-				BL MorseDigit
-				MOV R0, #9
-				BL MorseDigit
-				MOV R0, R4
-				BL MorseDigit
-				POP {LR}
-				BX LR
 
 dotdelay		;defines the duration of time to leave the LED on for a dot
 				PUSH {R4, LR}
-				MOV R4, #twentytwo
+				MOV R4, #(1 << 21)
 				BL loop
 				POP {R4, LR}
 				BX LR
