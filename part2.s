@@ -15,57 +15,61 @@ twentytwo EQU 0x00400000 ; 1 << 22
 
 __main
 	; Your code goes here!
-		MOV   R0, #7
-		MOV   R3, #7
-		MOV   R7, #19
-		MOV   R1, #0xbeef
 		BL    LEDSETUP
+		;BL    test_morse
+		MOV   R0, #5
 		BL    MorseDigit
 		B     forever
 
-fib		
-	; Your code goes here!
-
-; Call this function first to set up the LED
-LEDSETUP
-				PUSH  {R4, R5} ; To preserve R4 and R5
-				LDR   R4, =ten ; Load the value 1 << 10
-				LDR		R5, =SCGC5
-				STR		R4, [R5]
-				
-				LDR   R4, =eight
-				LDR   R5, =PCR22
-				STR   R4, [R5]
-				
-				LDR   R4, =twentytwo
-				LDR   R5, =PDDR
-				STR   R4, [R5]
-				POP   {R4, R5}
-				BX    LR
-
-dotdelay
-				MOV R2, #twentytwo
+test_morse		;test cases for MorseDigit functionality
 				PUSH {LR}
+				MOV R4, #5
+				MOV R0, #0
+				BL MorseDigit
+				MOV R0, #1
+				BL MorseDigit
+				MOV R0, #2
+				BL MorseDigit
+				MOV R0, #3
+				BL MorseDigit
+				MOV R0, #4
+				BL MorseDigit
+				MOV R0, #5
+				BL MorseDigit
+				MOV R0, #6
+				BL MorseDigit
+				MOV R0, #7
+				BL MorseDigit
+				MOV R0, #8
+				BL MorseDigit
+				MOV R0, #9
+				BL MorseDigit
+				MOV R0, R4
+				BL MorseDigit
+				POP {LR}
+				BX LR
+
+dotdelay		;defines the duration of time to leave the LED on for a dot
+				PUSH {R4, LR}
+				MOV R4, #twentytwo
 				BL loop
-				POP {LR}
-				BX LR
-				
-dashdelay
-				PUSH {LR}
-				BL dotdelay
-				BL dotdelay
-				BL dotdelay
-				POP {LR}
+				POP {R4, LR}
 				BX LR
 
-
-				
-loop
-				SUBS R2, #1
+loop			;repeatedly decrement counter until it reaches zero to create delay
+				SUBS R4, #1
 				BNE loop
 				BX LR
+				
+dashdelay		;defines the duration of time to leave the LED on for a dash
+				PUSH {LR}
+				BL dotdelay		;three times as long as dotdelay
+				BL dotdelay
+				BL dotdelay
+				POP {LR}
+				BX LR
 
-dot
+dot				;calling this generates a dot on the LED
 				PUSH {LR}
 				BL LEDON
 				BL dotdelay
@@ -74,7 +78,7 @@ dot
 				POP {LR}
 				BX LR
 
-dash
+dash			;calling this generates a dash on the LED
 				PUSH {LR}
 				BL LEDON
 				BL dashdelay
@@ -82,9 +86,18 @@ dash
 				BL dotdelay
 				POP {LR}
 				BX LR
-				
-one_morse 
-				;dot dash dash dash dash
+
+zero_morse		;dash dash dash dash dash
+				PUSH {LR}
+				BL dash
+				BL dash
+				BL dash
+				BL dash
+				BL dash
+				POP {LR}
+				BX LR
+
+one_morse		;dot dash dash dash dash
 				PUSH{LR}
 				BL dot
 				BL dash
@@ -92,10 +105,19 @@ one_morse
 				BL dash
 				BL dash
 				POP {LR}
-				BX LR 
-					
-three_morse
-				; dot dot dot dash dash
+				BX LR
+				
+two_morse		;dot dot dash dash dash
+				PUSH {LR}
+				BL dot
+				BL dot
+				BL dash
+				BL dash
+				BL dash
+				POP {LR}
+				BX LR
+
+three_morse		;dot dot dot dash dash
 				PUSH {LR}
 				BL dot
 				BL dot
@@ -104,9 +126,18 @@ three_morse
 				BL dash
 				POP {LR}
 				BX LR
+				
+four_morse		;dot dot dot dot dash
+				PUSH {LR}
+				BL dot
+				BL dot
+				BL dot
+				BL dot
+				BL dash
+				POP {LR}
+				BX LR
 
-five_morse 
-				;dot dot dot dot dot
+five_morse		;dot dot dot dot dot
 				PUSH {LR}
 				BL dot
 				BL dot
@@ -114,10 +145,19 @@ five_morse
 				BL dot
 				BL dot
 				POP {LR}
-				BX LR 
+				BX LR
 
-seven_morse
-				;dash dash dot dot dot
+six_morse		;dash dot dot dot dot
+				PUSH {LR}
+				BL dash
+				BL dot
+				BL dot
+				BL dot
+				BL dot
+				POP {LR}
+				BX LR
+
+seven_morse		;dash dash dot dot dot
 				PUSH {LR} 
 				BL dash
 				BL dash
@@ -125,64 +165,24 @@ seven_morse
 				BL dot
 				BL dot
 				POP {LR}
-				BX LR 
+				BX LR
 				
-nine_morse
-				;dash dash dash dash dot
+eight_morse		;dash dash dash dot dot
 				PUSH {LR}
 				BL dash
 				BL dash
 				BL dash
-				BL dash
+				BL dot
 				BL dot
 				POP {LR}
-				BX LR 
+				BX LR
 
-zero_morse
+nine_morse		;dash dash dash dash dot
 				PUSH {LR}
 				BL dash
 				BL dash
 				BL dash
 				BL dash
-				BL dash
-				POP {LR}
-				BX LR
-				
-two_morse
-				PUSH {LR}
-				BL dot
-				BL dot
-				BL dash
-				BL dash
-				BL dash
-				POP {LR}
-				BX LR
-				
-four_morse
-				PUSH {LR}
-				BL dot
-				BL dot
-				BL dot
-				BL dot
-				BL dash
-				POP {LR}
-				BX LR
-six_morse
-				PUSH {LR}
-				BL dash
-				BL dot
-				BL dot
-				BL dot
-				BL dot
-				POP {LR}
-				BX LR
-				
-eight_morse
-				PUSH {LR}
-				BL dash
-				BL dash
-				BL dash
-				BL dot
 				BL dot
 				POP {LR}
 				BX LR
@@ -211,6 +211,23 @@ MorseDigit
 				BEQ nine_morse
 				POP {LR}
 				BX LR
+
+; Call this function first to set up the LED
+LEDSETUP
+				PUSH  {R4, R5} ; To preserve R4 and R5
+				LDR   R4, =ten ; Load the value 1 << 10
+				LDR		R5, =SCGC5
+				STR		R4, [R5]
+				
+				LDR   R4, =eight
+				LDR   R5, =PCR22
+				STR   R4, [R5]
+				
+				LDR   R4, =twentytwo
+				LDR   R5, =PDDR
+				STR   R4, [R5]
+				POP   {R4, R5}
+				BX    LR
 
 ; The functions below are for you to use freely      
 LEDON				
